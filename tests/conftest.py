@@ -61,3 +61,32 @@ async def page(browser):
     # Cleanup after test — take screenshot on failure (we'll improve this later)
     await context.close()
     logger.info("Browser context closed")
+
+
+# Add these imports at the top of conftest.py:
+from pages.home_page import HomePage
+from pages.login_page import LoginPage
+
+
+# Add these fixtures at the bottom of conftest.py:
+
+@pytest.fixture(scope="function")
+async def home_page(page):
+    """
+    Ready-to-use HomePage object.
+    Already navigated to homepage when your test receives it.
+    """
+    hp = HomePage(page)
+    await hp.open()
+    return hp
+
+
+@pytest.fixture(scope="function")
+async def login_page(page):
+    """
+    Ready-to-use LoginPage object.
+    Already navigated to login page when your test receives it.
+    """
+    lp = LoginPage(page)
+    await lp.open()
+    return lp
