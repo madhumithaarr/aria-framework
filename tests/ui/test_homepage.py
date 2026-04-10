@@ -17,14 +17,24 @@ async def test_homepage_loads(page):
         f"Expected 'Automation Exercise' in title but got: '{title}'"
 
 
+# @pytest.mark.smoke
+# @pytest.mark.ui
+# async def test_navbar_is_visible(page):
+#     """Verify the top navigation bar renders correctly."""
+#     await page.goto(settings.base_url)
+
+#     # Playwright locator — CSS selector targeting the nav element
+#     navbar = page.locator("nav#header")
+#     assert await navbar.is_visible(), "Navigation bar is not visible on homepage"
+
 @pytest.mark.smoke
 @pytest.mark.ui
 async def test_navbar_is_visible(page):
     """Verify the top navigation bar renders correctly."""
     await page.goto(settings.base_url)
 
-    # Playwright locator — CSS selector targeting the nav element
-    navbar = page.locator("nav#header")
+    # Correct selector for automationexercise.com
+    navbar = page.locator("#header")
     assert await navbar.is_visible(), "Navigation bar is not visible on homepage"
 
 

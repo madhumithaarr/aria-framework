@@ -24,10 +24,9 @@ class Settings(BaseSettings):
     # Logging level
     log_level: str = Field(default="INFO")
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    # New Pydantic v2 style — replaces the old inner Config class
+    model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
 
 
-# Create ONE instance — import this everywhere, don't create new Settings() each time
+# Single instance — import this everywhere
 settings = Settings()
