@@ -90,3 +90,49 @@ async def login_page(page):
     lp = LoginPage(page)
     await lp.open()
     return lp
+
+# Add to imports at top:
+from pages.products_page import ProductsPage
+from pages.cart_page import CartPage
+
+
+# Add these fixtures at the bottom:
+
+@pytest.fixture(scope="function")
+async def products_page(page):
+    """Ready-to-use ProductsPage — already navigated."""
+    pp = ProductsPage(page)
+    await pp.open()
+    return pp
+
+
+@pytest.fixture(scope="function")
+async def cart_page(page):
+    """Ready-to-use CartPage — already navigated."""
+    cp = CartPage(page)
+    await cp.open()
+    return cp
+
+
+@pytest.fixture(scope="function")
+async def logged_in_page(page):
+    """
+    Special fixture: gives you a page that is ALREADY logged in.
+    Use this for tests that need authentication but aren't testing login itself.
+
+    This is called 'test setup' or 'precondition' — you set the world up
+    correctly before the actual test action begins.
+    """
+    from pages.login_page import LoginPage
+    from tests.test_data import VALID_USER
+
+    login = LoginPage(page)
+    await login.open()
+    await login.login(VALID_USER["email"], VALID_USER["password"])
+
+    # Verify login succeeded before handing page to the test
+    assert await login.is_logged_in(), \
+        "logged_in_page fixture: Login failed during setup!"
+
+    logger.info("logged_in_page fixture: Login successful, handing page to test")
+    return page
