@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "aria-framework"
+version = "0.1.0"
+description = "AI-Augmented Regression & Intelligence Automation Framework"
+authors = ["Your Name <you@email.com>"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = [
+    "--html=reports/report.html",
+    "--self-contained-html",
+    "-v"
+]
+markers = [
+    "smoke: quick sanity checks, run on every commit",
+    "regression: full regression suite",
+    "ai_generated: tests created by the AI generator module",
+    "ui: browser-based UI tests",
+    "api: API-level tests"
+]

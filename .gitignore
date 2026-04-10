@@ -1,0 +1,23 @@
+# Virtual environment — never commit this
+.venv/
+
+# Environment variables — contains API keys, NEVER commit
+.env
+
+# Python cache files — auto-generated, not needed
+__pycache__/
+*.pyc
+*.pyo
+
+# Test reports — generated fresh each run
+reports/
+
+# Pytest cache
+.pytest_cache/
+
+# Playwright artifacts
+playwright-report/
+test-results/
+
+# VS Code settings (optional — remove this line if you want to share settings with team)
+.vscode/
